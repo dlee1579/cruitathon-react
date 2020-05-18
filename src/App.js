@@ -9,7 +9,7 @@ import Team from './pages/Team';
 function App() {
   return (
     <div>
-      <Route path='/' component={Home}/>
+      <Route path='/home' component={Home}/>
       <Route path='/team/:id' component={Team}/>
     </div>
   );
