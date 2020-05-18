@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Banner = ({Team}) => {
     let bannerStyle;
-    console.log(Team);
+    // console.log(Team);
     if (Team) {
         bannerStyle = {
             color: Team.color_secondary,

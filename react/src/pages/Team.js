@@ -20,15 +20,15 @@ export const Team = (props) => {
 
     return (
         <div>
-            <Banner Team={Team}></Banner>
+            <Banner Team={Team.team_aggregate_stats}></Banner>
             <div className="container">
                 <div className="row">
-                    <Blurb Team={Team} />
+                    <Blurb Team={Team.team_aggregate_stats} />
                 </div>
                 <div className="row">
-                    <Graph />
-                    <Graph />
-                    <Graph />
+                    <Graph data={Team.team_position_stats}/>
+                    <Graph data={Team.team_state_stats}/>
+                    <Graph data={Team.team_competition_stats}/>
                 </div>
             </div>
         </div>

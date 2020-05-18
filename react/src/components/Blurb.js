@@ -2,20 +2,30 @@ import React from 'react'
 import styled from 'styled-components';
 
 
-export const Blurb = ({Team}) => {
-    const blurbStyle = {
-        color: Team.color_primary,
-        background: Team.color_secondary
+export const Blurb = (props) => {
+    console.log(props.Team);
+    let blurbStyle;
+    if (props.Team) {
+        blurbStyle = {
+            color: props.Team.color_primary,
+            background: props.Team.color_secondary
+        };
+
+        return (
+            <MainContainer className="col-xl-6">
+                <div className="key_data" style={blurbStyle}>
+                    <h2>{"Team Name: " + props.Team.team}</h2>
+                    <p>{"# of Commits: " + props.Team.commit_count}</p>
+                    <p>{"Average Commit Score: " + props.Team.avg_score}</p>
+                </div>
+            </MainContainer>
+        )
     }
-    return (
-        <MainContainer className="col-xl-6">
-            <div className="key_data" style={blurbStyle}>
-                <h2>{"Team Name: " + Team.team}</h2>
-                <p>{"# of Commits: " + Team.commit_count}</p>
-                <p>{"Average Commit Score: " + Team.avg_score}</p>
-            </div>
-        </MainContainer>
-    )
+    else {
+        blurbStyle = {
+        };
+        return "";
+    }
 }
 
 export default Blurb;
