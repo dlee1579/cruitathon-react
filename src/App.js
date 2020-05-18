@@ -7,16 +7,9 @@ import Home from './pages/Home';
 import Team from './pages/Team';
 
 function App() {
-  // useEffect(() => {
-  //   fetch('/')
-  //     .then(response => {
-  //       return response.json();
-  //     });
-  // }, []);
-
   return (
     <div>
-      <Route path='/home' component={Home}/>
+      <Route path='/' component={Home}/>
       <Route path='/team/:id' component={Team}/>
     </div>
   );
