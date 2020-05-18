@@ -1,3 +1,8 @@
+:root {
+  --home-blue: #1F618D;
+  --home-yellow: #FFC300;
+}
+
 .App {
   text-align: center;
 }
@@ -36,3 +41,8 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: college-block;
+  src: url('./college-block/college-block.otf') format('opentype');
+};
