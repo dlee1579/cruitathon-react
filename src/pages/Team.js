@@ -13,7 +13,7 @@ export const Team = (props) => {
             .then(response => response.json()
             .then(data => {
                 setTeam(data);
-                // console.log(data);
+                console.log(data);
             })
             );
     }, []);
