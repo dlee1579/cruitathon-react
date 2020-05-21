@@ -8,7 +8,7 @@ export const Home = () => {
     const [Teams, setTeams] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000")
+        fetch("http://cruitathon-flask.herokuapp.com/")
             .then(response => response.json()
             .then(data => {
                 setTeams(data);

@@ -8,7 +8,7 @@ export const Team = (props) => {
     const [Team, setTeam] = useState({});
 
     useEffect(() => {
-        let url = "http://localhost:5000/team/" + props.match.params.id;
+        let url = "http://cruitathon-flask.herokuapp.com/team/" + props.match.params.id;
         fetch(url)
             .then(response => response.json()
             .then(data => {
