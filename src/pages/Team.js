@@ -8,12 +8,12 @@ export const Team = (props) => {
     const [Team, setTeam] = useState({});
 
     useEffect(() => {
-        let url = "http://cruitathon-flask.herokuapp.com/team/" + props.match.params.id;
+        let url = "https://cruitathon-flask.herokuapp.com/team/" + props.match.params.id;
         fetch(url)
             .then(response => response.json()
             .then(data => {
                 setTeam(data);
-                console.log(data);
+                // console.log(data);
             })
             );
     }, []);
