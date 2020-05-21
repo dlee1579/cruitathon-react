@@ -26,9 +26,9 @@ export const Team = (props) => {
                     <Blurb Team={Team.team_aggregate_stats} />
                 </div>
                 <div className="row">
-                    <Graph data={Team.team_position_stats}/>
-                    <Graph data={Team.team_state_stats}/>
-                    <Graph data={Team.team_competition_stats}/>
+                    <Graph data={Team.team_position_stats} name={props.match.params.id + " Commits by Position"}/>
+                    <Graph data={Team.team_state_stats} name={props.match.params.id + " Commits by Home State"}/>
+                    <Graph data={Team.team_competition_stats} name={props.match.params.id + " Commits by Rival Offers"}/>
                 </div>
             </div>
         </div>

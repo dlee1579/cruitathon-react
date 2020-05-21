@@ -10,7 +10,7 @@ export const Graph = (props) => {
         <div className="col-xl-4">
             <Plot
                 data={props.data}
-                layout={ {width: 350, height: 450, title: 'A Fancy Plot'} }
+                layout={ {width: 350, height: 450, title: props.name} }
             />
         </div>
     )
