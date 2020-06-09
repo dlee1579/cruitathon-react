@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Collapse from 'react-bootstrap/Collapse';
 
 export const ConferenceTeams = ( { Conference, Teams }) => {
     const [open, setOpen] = useState(false);
-
+    // console.log(Teams);
     return (
         <div className="card">
             <div className="card-header">
@@ -13,12 +13,13 @@ export const ConferenceTeams = ( { Conference, Teams }) => {
                     aria-expanded={open} className="btn btn-link">{Conference}</button></h5>
             </div>
             <Collapse in={open}>
-                <div className="card-body" className="collapse" id="example-collapse-text">
+                <div className="card-body collapse" id="example-collapse-text">
                     {Teams.map(Team => {
                         if (Team.conference === Conference ) { 
+                            // console.log(Teams);
                             return (
                                 <div>
-                                    <NavLink to={'/team/' + Team.team}>{Team.team}</NavLink>
+                                    <Link to={{pathname: '/team/' + Team.team, state: Teams}}>{Team.team}</Link>
                                 </div>
                             )
                         }

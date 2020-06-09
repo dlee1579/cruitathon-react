@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
-export const Banner = ({Team}) => {
+export const Banner = ({Team, Teams}) => {
     let bannerStyle;
-    // console.log(Team);
+    // console.log(Teams);
     if (Team) {
         bannerStyle = {
             color: Team.color_secondary,
@@ -19,14 +20,7 @@ export const Banner = ({Team}) => {
         <MainContainer className="jumbotron text-center" style={bannerStyle}>
             <Link to= "/"><h1 style={bannerStyle}>Cruitathon</h1></Link>
             <p style={bannerStyle}>Using College Football data visualizations to prove that my team is better than yours</p>
-            <div className="row justify-content-center text-center">
-                <input type="text" id='teamInput' placeholder='Team Name' className="form-control form-control-lg text-center"/>
-                <div id="search_results">
-                    <ul id="teamList">
-
-                    </ul>
-                </div>
-            </div>
+            <SearchBar Teams= {Teams} />
         </MainContainer>
     )
 }

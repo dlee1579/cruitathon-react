@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Banner from '../components/Banner';
 import ConferenceList from '../components/ConferenceList';
+// import SearchBar from "react-native-dynamic-search-bar";
+
 
 
 export const Home = () => {

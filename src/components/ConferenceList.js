@@ -4,9 +4,9 @@ import ConferenceTeams from './ConferenceTeams';
 // import { List } from "semantic-ui-react";
 
 
-export const ConferenceList = ({ Teams }) => {
+export const ConferenceList = ({ Teams }, props) => {
     const powerFive = ['ACC', 'Big Ten', 'Big 12', 'Pac-12', 'SEC'];
-    // console.log(Teams);
+    // console.log(props);
     // const [Teams, setTeams] = useState([]);
 
     return (

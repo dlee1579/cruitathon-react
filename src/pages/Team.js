@@ -16,11 +16,14 @@ export const Team = (props) => {
                 // console.log(data);
             })
             );
-    }, []);
+    }, [props.match.params.id]);
+
+    // console.log(props);
+    // console.log(Team);
 
     return (
         <div>
-            <Banner Team={Team.team_aggregate_stats}></Banner>
+            <Banner Team={Team.team_aggregate_stats} Teams={props.location.state}></Banner>
             <div className="container">
                 <div className="row">
                     <Blurb Team={Team.team_aggregate_stats} />

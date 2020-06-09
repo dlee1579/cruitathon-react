@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 export const Blurb = (props) => {
-    console.log(props.Team);
+    // console.log(props.Team);
     let blurbStyle;
     if (props.Team) {
         blurbStyle = {
