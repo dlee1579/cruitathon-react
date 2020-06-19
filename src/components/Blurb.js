@@ -14,7 +14,7 @@ export const Blurb = (props) => {
         return (
             <MainContainer className="col-xl-6">
                 <div className="key_data" style={blurbStyle}>
-                    <h2>{"Team Name: " + props.Team.team}</h2>
+                    <h2>{props.Team.team}</h2>
                     <p>{"# of Commits: " + props.Team.commit_count}</p>
                     <p>{"Average Commit Score: " + props.Team.avg_score}</p>
                 </div>

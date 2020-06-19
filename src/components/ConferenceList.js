@@ -5,7 +5,7 @@ import ConferenceTeams from './ConferenceTeams';
 
 
 export const ConferenceList = ({ Teams }, props) => {
-    const powerFive = ['ACC', 'Big Ten', 'Big 12', 'Pac-12', 'SEC'];
+    const powerFive = ['ACC', 'Big Ten', 'Big 12', 'Pac-12', 'SEC', 'C-USA', 'AAC', 'Sun Belt', 'MWC', 'MAC', 'Ind'];
     // console.log(props);
     // const [Teams, setTeams] = useState([]);
 
