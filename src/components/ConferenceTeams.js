@@ -8,9 +8,9 @@ export const ConferenceTeams = ( { Conference, Teams }) => {
     return (
         <div className="card">
             <div className="card-header">
-                <h5 className="mb-0"><button onClick={() => setOpen(!open)}
+                <h3 className="mb-0"><button style={{fontSize: "24px"}} onClick={() => setOpen(!open)}
                     aria-controls="example-collapse-text"
-                    aria-expanded={open} className="btn btn-link">{Conference}</button></h5>
+                    aria-expanded={open} className="btn btn-link">{Conference}</button></h3>
             </div>
             <Collapse in={open}>
                 <div className="card-body collapse" id="example-collapse-text">
@@ -18,7 +18,7 @@ export const ConferenceTeams = ( { Conference, Teams }) => {
                             // console.log(Teams);
                             return (
                                 <div>
-                                    <Link to={{pathname: '/team/' + Team.team, Teams: Team}} Team={Team}>{Team.team}</Link>
+                                    <Link style={{fontSize: "24px"}} to={{pathname: '/team/' + Team.team, Teams: Team}} Team={Team}>{Team.team}</Link>
                                 </div>
                             )
                     })}

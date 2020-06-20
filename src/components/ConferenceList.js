@@ -14,7 +14,7 @@ export const ConferenceList = ({ Teams }, props) => {
         <MainContainer className="container">
             <div className="row justify-content-md-center">
                 <div className="col-xl-4" align='center'>
-                    <h3>Teams by Conference</h3>
+                    <h2>Teams by Conference</h2>
                     
                     <div className="accordion">
                         {conferenceNames.map(conf => {
