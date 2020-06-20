@@ -4,7 +4,7 @@ import ConferenceList from '../components/ConferenceList';
 // import SearchBar from "react-native-dynamic-search-bar";
 import ReactGA from 'react-ga';
 import MetaTags from 'react-meta-tags';
-
+import teamsList from '../components/Teams.json';
 
 
 export const Home = () => {
@@ -12,13 +12,14 @@ export const Home = () => {
     const [Teams, setTeams] = useState([]);
 
     useEffect(() => {
-        fetch("https://cruitathon-flask.herokuapp.com/")
-            .then(response => response.json()
-            .then(data => {
-                setTeams(data);
-                // console.log(data);
-            })
-            );
+        // fetch("https://cruitathon-flask.herokuapp.com/")
+        //     .then(response => response.json()
+        //     .then(data => {
+        //         setTeams(data);
+        //         // console.log(data);
+        //     })
+        //     );
+        setTeams(teamsList);
         ReactGA.initialize("UA-160209262-2");
         ReactGA.pageview(window.location.pathname);
     }, []);

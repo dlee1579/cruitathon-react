@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import uniqueRandomArray from 'unique-random-array';
 import styled from 'styled-components';
 import Image from 'react-bootstrap/Image';
@@ -9,11 +9,20 @@ import Button from 'react-bootstrap/Button';
 export const Comments = ({ team, comments}) => {
     const [text, setText] = useState('');
     const [commentsList, setCommentsList] = useState();
-
+    const isFirstRun = useRef(true);
+    
+    // console.log(isFirstRun);
     useEffect(()=> {
         setCommentsList(comments);
         // console.log(comments);
+        // console.log(isFirstRun);
     }, [comments])
+
+    useEffect(()=> {
+        if (!isFirstRun.current) {
+            window.scrollTo({left: 0,top: document.body.scrollHeight+300, behavior: "smooth"});
+        }
+    }, [commentsList])
 
     const changeComment = event => {
         event.preventDefault();
@@ -23,40 +32,37 @@ export const Comments = ({ team, comments}) => {
         // console.log(comment);
         event.preventDefault();
 
-        alert("Are you sure you want to submit a comment? Don't take up all my server space unless you really mean it!")
-
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: {text}, team: {team} })
             // body: {"text": {text}, "team": {team}}
         };
+        // console.log(event.target);
+        event.target.reset();
 
-        let url = 'http://cruitathon-flask.herokuapp.com/submit';
+        let url = 'https://cruitathon-flask.herokuapp.com/submit';
         fetch(url, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setCommentsList(data);
                 // console.log(data);
             });
+        if (isFirstRun.current) {
+            isFirstRun.current = false;
+        }
     }
-    // console.log(dogList);
-    // console.log(typeof dogList);
-    // const random = uniqueRandomArray(dogList);
-    // console.log(random());
 
     const importAll = r => {
         return r.keys().map(r);
     }
     const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/))
     const random = uniqueRandomArray(images);
-    // console.log(images)
-    // console.log(random())
 
     return (
-        <MainContainer className="comments-container" style={{paddingTop: "100px", fontFamily: "college-block"}}>
-            <h1 >Comments Section</h1>
-            <h6>Post your thoughts here. This comment section is a work in progress. In the meantime, everyone gets a dog picture.</h6>
+        <MainContainer className="comments-container" style={{paddingTop: "100px", fontFamily: "college-block", marginLeft: "20px"}}>
+            <h1 className="comments-header">Comments Section</h1>
+            <h6 >Post your thoughts here. This comment section is a work in progress. In the meantime, everyone gets a dog picture.</h6>
             <Form onSubmit={submitComment}>
                 <Form.Group controlId='formComment'>
                     <Form.Control as="textarea" rows="3" name='text' onChange={changeComment} />
@@ -90,6 +96,14 @@ const MainContainer = styled.div`
         padding: 20px;
         font-weight: bold;
         font-family: college-block;
+        
+    }
+
+    .comments-header {
+        background: #000000;
+        border-radius: .2em;
+        color: white;
+        padding: 10px;
     }
 
     .speech-bubble {
