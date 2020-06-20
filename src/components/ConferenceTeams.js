@@ -14,16 +14,24 @@ export const ConferenceTeams = ( { Conference, Teams }) => {
             </div>
             <Collapse in={open}>
                 <div className="card-body collapse" id="example-collapse-text">
-                    {Teams.map(Team => {
+                    {Teams.filter(Team => Team["conference"] === Conference).map(Team => {
+                            // console.log(Teams);
+                            return (
+                                <div>
+                                    <Link to={{pathname: '/team/' + Team.team, Teams: Team}} Team={Team}>{Team.team}</Link>
+                                </div>
+                            )
+                    })}
+                    {/* {Teams.map(Team => {
                         if (Team.conference === Conference ) { 
                             // console.log(Teams);
                             return (
                                 <div>
-                                    <Link to={{pathname: '/team/' + Team.team, state: Teams}}>{Team.team}</Link>
+                                    <Link to={{pathname: '/team/' + Team.team, Teams: Team}} Team={Team}>{Team.team}</Link>
                                 </div>
                             )
                         }
-                    })}
+                    })} */}
                 </div>
             </Collapse>
             

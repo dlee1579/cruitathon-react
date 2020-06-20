@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
-export const Banner = ({Team, Teams}) => {
+export const Banner = ({Team, Teams, School}) => {
     let bannerStyle;
-    // console.log(Teams);
-    if (Team) {
+    // console.log(School);
+    if (School) {
         bannerStyle = {
-            color: Team.color_secondary,
-            background: Team.color_primary
+            color: School.color_secondary,
+            background: School.color_primary
         }
     }
     else {

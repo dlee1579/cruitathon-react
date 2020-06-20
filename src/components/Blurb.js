@@ -2,21 +2,22 @@ import React from 'react'
 import styled from 'styled-components';
 
 
-export const Blurb = (props) => {
-    // console.log(props.Team);
+export const Blurb = ({School, Team}) => {
+    // console.log(Team);
     let blurbStyle;
-    if (props.Team) {
+    if (School) {
         blurbStyle = {
-            color: props.Team.color_primary,
-            background: props.Team.color_secondary
+            color: School.color_primary,
+            background: School.color_secondary
         };
-
+    }
+    if (Team) {
         return (
             <MainContainer className="col-xl-6">
                 <div className="key_data" style={blurbStyle}>
-                    <h2>{props.Team.team}</h2>
-                    <p>{"# of Commits: " + props.Team.commit_count}</p>
-                    <p>{"Average Commit Score: " + props.Team.avg_score}</p>
+                    <h2>{Team.team}</h2>
+                    <p>{"# of Commits: " + Team.commit_count}</p>
+                    <p>{"Average Commit Score: " + Team.avg_score}</p>
                 </div>
             </MainContainer>
         )

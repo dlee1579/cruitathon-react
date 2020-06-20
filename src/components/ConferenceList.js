@@ -5,9 +5,10 @@ import ConferenceTeams from './ConferenceTeams';
 
 
 export const ConferenceList = ({ Teams }, props) => {
-    const powerFive = ['ACC', 'Big Ten', 'Big 12', 'Pac-12', 'SEC', 'C-USA', 'AAC', 'Sun Belt', 'MWC', 'MAC', 'Ind'];
+    const conferenceNames = ['ACC', 'Big Ten', 'Big 12', 'Pac-12', 'SEC', 'C-USA', 'AAC', 'Sun Belt', 'MWC', 'MAC', 'Ind'];
     // console.log(props);
     // const [Teams, setTeams] = useState([]);
+    // console.log(Teams);
 
     return (
         <MainContainer className="container">
@@ -16,7 +17,7 @@ export const ConferenceList = ({ Teams }, props) => {
                     <h3>Teams by Conference</h3>
                     
                     <div className="accordion">
-                        {powerFive.map(conf => {
+                        {conferenceNames.map(conf => {
                             return <ConferenceTeams Conference={ conf } Teams = { Teams }></ConferenceTeams>
                         })}
                     </div>

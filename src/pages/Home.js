@@ -4,7 +4,7 @@ import ConferenceList from '../components/ConferenceList';
 // import SearchBar from "react-native-dynamic-search-bar";
 import ReactGA from 'react-ga';
 import MetaTags from 'react-meta-tags';
-import teamsList from '../components/Teams.json';
+import TeamsList from '../components/Teams.json';
 
 
 export const Home = () => {
@@ -19,7 +19,8 @@ export const Home = () => {
         //         // console.log(data);
         //     })
         //     );
-        setTeams(teamsList);
+        setTeams(TeamsList);
+        // console.log(TeamsList);
         ReactGA.initialize("UA-160209262-2");
         ReactGA.pageview(window.location.pathname);
     }, []);
