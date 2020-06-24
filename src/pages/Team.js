@@ -7,11 +7,14 @@ import MetaTags from 'react-meta-tags';
 // import CommentBox from 'react-commentbox';
 import Comments from '../components/Comments';
 import TeamsList from '../components/Teams.json';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 export const Team = (props) => {
     const [Team, setTeam] = useState({});
     const [School, setSchool] = useState({});
+    const [year, setYear] = useState(2020)
 
     useEffect(() => {
         let url = "https://cruitathon-flask.herokuapp.com/team/" + props.match.params.id;
@@ -25,8 +28,15 @@ export const Team = (props) => {
         ReactGA.initialize("UA-160209262-2");
         ReactGA.pageview(window.location.pathname);
         setSchool(TeamsList.find(element => element["team"] === props.match.params.id));
+        // console.log(props.search);
         // console.log(TeamsList.find(element => element["team"] === props.match.params.id));
-    }, [props.match.params.id]);
+    // }, [props.match.params.id]);
+    }, [props.match.url]);
+    // console.log(props.search);
+
+    // useEffect(()=> {
+
+    // }, [year])
 
     // console.log(props);
     // console.log(Team);
@@ -39,6 +49,21 @@ export const Team = (props) => {
             </MetaTags>
             <Banner School={School} Team={Team.team_aggregate_stats} Teams={props.location.state}></Banner>
             <div className="container">
+            <DropdownButton id="dropdown-basic-button" size='sm' title={year} onClick={(e)=>{
+                setYear(e.target.text);
+                // console.log(e.target.text);
+                console.log(props.match.params.id);
+                // e.preventDefault();
+                // e.target.text = year;
+                // fetch call to flask api for updated result set by year
+                }}>
+                {[2020, 2019, 2018, 2017, 2016].map((year) => {
+                    return <Dropdown.Item href={'?year='+year}>{year}</Dropdown.Item>
+                })}
+                {/* <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+            </DropdownButton>
                 <div className="row">
                     <Blurb School={School} Team={Team.team_aggregate_stats} />
                 </div>

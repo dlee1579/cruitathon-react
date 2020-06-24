@@ -16,6 +16,7 @@ export const Blurb = ({School, Team}) => {
             <MainContainer className="col-xl-6">
                 <div className="key_data" style={blurbStyle}>
                     <h2>{Team.team}</h2>
+                    <h4>2018-2020 Recruiting Classes</h4>
                     <p>{"# of Commits: " + Team.commit_count}</p>
                     <p>{"Average Commit Score: " + Team.avg_score}</p>
                 </div>

@@ -76,9 +76,7 @@ export const Comments = ({ team, comments}) => {
                 <h4>Recent Comments:</h4>
                 {commentsList && commentsList.map(comment => {
                     return <div className="row" style={{padding: "20px"}}>
-                        {/* <img src={require(`${random()}`)} height="60" alt="" style={{paddingLeft: "10px"}}/> */}
                         <Image src={random()} height="60"/>
-                        {/* <p className="comment" style={{padding: "10px", fontFamily: "college-block", background:"black", color:"white", borderRadius:"10px", marginLeft: "10px"}}>{comment.text}</p> */}
                         <p className="speech-bubble" >{comment.text}</p>
                     </div>
                 })}
