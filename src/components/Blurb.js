@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 
 
-export const Blurb = ({School, Team}) => {
+export const Blurb = ({School, Team, Year}) => {
     // console.log(Team);
     let blurbStyle;
     if (School) {
@@ -11,12 +11,15 @@ export const Blurb = ({School, Team}) => {
             background: School.color_secondary
         };
     }
+    if (Year == "all") {
+        Year = "2018-2020";
+    }
     if (Team) {
         return (
             <MainContainer className="col-xl-6">
                 <div className="key_data" style={blurbStyle}>
                     <h2>{Team.team}</h2>
-                    <h4>2018-2020 Recruiting Classes</h4>
+                    <h4>{Year} Recruiting Class</h4>
                     <p>{"# of Commits: " + Team.commit_count}</p>
                     <p>{"Average Commit Score: " + Team.avg_score}</p>
                 </div>
