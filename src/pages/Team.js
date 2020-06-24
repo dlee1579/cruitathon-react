@@ -49,7 +49,7 @@ export const Team = (props) => {
             </MetaTags>
             <Banner School={School} Team={Team.team_aggregate_stats} Teams={props.location.state}></Banner>
             <div className="container">
-            <DropdownButton id="dropdown-basic-button" size='sm' title={year} onClick={(e)=>{
+            {/* <DropdownButton id="dropdown-basic-button" size='sm' title={year} onClick={(e)=>{
                 setYear(e.target.text);
                 // console.log(e.target.text);
                 console.log(props.match.params.id);
@@ -60,10 +60,10 @@ export const Team = (props) => {
                 {[2020, 2019, 2018, 2017, 2016].map((year) => {
                     return <Dropdown.Item href={'?year='+year}>{year}</Dropdown.Item>
                 })}
-                {/* <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                 <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
-            </DropdownButton>
+                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </DropdownButton> */}
                 <div className="row">
                     <Blurb School={School} Team={Team.team_aggregate_stats} />
                 </div>
