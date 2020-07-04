@@ -11,7 +11,7 @@ export const Blurb = ({School, Team, Year}) => {
             background: School.color_secondary
         };
     }
-    if (Year == "all") {
+    if (Year === "all") {
         Year = "2018-2020";
     }
     if (Team) {

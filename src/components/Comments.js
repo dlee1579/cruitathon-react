@@ -112,6 +112,8 @@ const MainContainer = styled.div`
         margin-left: 20px;
         margin-top: 20px;
         padding: 10px;
+        font-family: calibri;
+        font-weight: bold;
 
     }
     

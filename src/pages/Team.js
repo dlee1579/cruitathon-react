@@ -9,38 +9,48 @@ import Comments from '../components/Comments';
 import TeamsList from '../components/Teams.json';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
+import {RecruitingMap} from '../components/RecruitingMap';
+import Row from 'react-bootstrap/Row';
 
 
 export const Team = (props) => {
     const [Team, setTeam] = useState({});
     const [School, setSchool] = useState({});
-    const [year, setYear] = useState(2020)
+    const [year, setYear] = useState(2020);
+    const [mapType, setMapType] = useState('state');
 
     useEffect(() => {
         let url = "https://cruitathon-flask.herokuapp.com/team/" + props.match.params.id + "/" + year;
+        // let url = "http://127.0.0.1:5000/team/" + props.match.params.id + "/" + year;
         fetch(url)
             .then(response => response.json()
             .then(data => {
                 setTeam(data);
-                console.log(props);
+                // console.log(data);
+                // console.log(Team);
             })
             );
         ReactGA.initialize("UA-160209262-2");
         ReactGA.pageview(window.location.pathname);
         setSchool(TeamsList.find(element => element["team"] === props.match.params.id));
-        // console.log(props.search);
+        // console.log(Team);
         // console.log(TeamsList.find(element => element["team"] === props.match.params.id));
     // }, [props.match.params.id]);
-    }, [props.match.url, year]);
-    // console.log(props.search);
-
-    // useEffect(()=> {
-
-    // }, [year])
-
-    // console.log(props);
-    // console.log(Team);
-
+    }, [props.match.url, props.match.params.id, year]);
+    
+    const showMap = (Team, props) => {
+        if (mapType === 'state'){
+            return (
+                <RecruitingMap data={Team.team_state_stats} name={props.match.params.id + " Commits by Home State"}/>
+            )
+        }
+        else {
+            return (
+                <RecruitingMap data={Team.team_hometown_stats} name={props.match.params.id + " Commits by Geographic Location"}></RecruitingMap>
+            )
+        }
+    }
 
     return (
         <div>
@@ -49,26 +59,37 @@ export const Team = (props) => {
             </MetaTags>
             <Banner School={School} Team={Team.team_aggregate_stats} Teams={props.location.state}></Banner>
             <div className="container">
-            <DropdownButton id="dropdown-basic-button" size='sm' title={year} onClick={(e)=>{
-                setYear(e.target.text);
-                // console.log(e.target.text);
-                console.log(props.match.params.id);
-                // e.preventDefault();
-                // e.target.text = year;
-                // fetch call to flask api for updated result set by year
-                }}>
-                {[2020, 2019, 2018, "all"].map((year) => {
-                    return <Dropdown.Item>{year}</Dropdown.Item>
-                })}
-            </DropdownButton>
+                <DropdownButton id="dropdown-basic-button" size='sm' title={year} onClick={(e)=>{
+                    setYear(e.target.text);
+                    // console.log(e.target.text);
+                    console.log(props.match.params.id);
+                    // e.preventDefault();
+                    // e.target.text = year;
+                    // fetch call to flask api for updated result set by year
+                    }}>
+                    {[2020, 2019, 2018, "all"].map((year) => {
+                        return <Dropdown.Item>{year}</Dropdown.Item>
+                    })}
+                </DropdownButton>
                 <div className="row">
                     <Blurb School={School} Team={Team.team_aggregate_stats} Year = {year}/>
                 </div>
-                <div className="row">
+                <Row className="justify-content-md-center">
                     <Graph data={Team.team_position_stats} name={props.match.params.id + " Commits by Position"}/>
-                    <Graph data={Team.team_state_stats} name={props.match.params.id + " Commits by Home State"}/>
+                    {/* <Graph data={Team.team_state_stats} name={props.match.params.id + " Commits by Home State"}/> */}
                     <Graph data={Team.team_competition_stats} name={props.match.params.id + " Commits by Rival Offers"}/>
-                </div>
+                </Row>
+                <Row>
+                    <Button variant="secondary" value="state" onClick={(e)=> setMapType(e.target.value)}>State View</Button>
+                    <Button variant="dark" value="geo" onClick={(e)=> setMapType(e.target.value)}>Nation View</Button>
+                </Row>
+                {/* <h3>{mapType}</h3> */}
+                    {/* <Graph data={Team.team_hometown_stats} name={props.match.params.id + " Commits by Geographic Location"}/> */}
+                <Row className="justify-content-md-center">
+                    {showMap(Team, props)}
+                </Row>
+                {/* <RecruitingMap style={{display: 'none'}} data={Team.team_hometown_stats} name={props.match.params.id + " Commits by Geographic Location"}></RecruitingMap> */}
+
                 <div className="row">
                     <Comments team={props.match.params.id} comments={Team.comments_list}></Comments>
                 </div>
