@@ -10,25 +10,23 @@ export const Graph = (props) => {
     // let data = props.data;
 
     return (
-        <div 
-        // className="col-xl-4"
-        >
-            <Plot
-                data={props.data}
-                layout={ {width: 450, height: 550, title: props.name, 
-                    geo: {
-                        scope: 'usa',
-                        projection: {
-                            type: 'albers usa'
-                        },
-                        showland: true,
-                        landcolor: 'rgb(250,250,250)',
-                        subunitcolor: 'rgb(217,217,217)',
-                        countrycolor: 'rgb(217,217,217)',
-                        countrywidth: 0.5,
-                        subunitwidth: 0.5
-                    }} }
-            />
-        </div>
+        <Plot className="col-xl-4"
+            data={props.data}
+            layout={ {
+                // width: 450, height: 550, 
+                title: props.name, 
+                geo: {
+                    scope: 'usa',
+                    projection: {
+                        type: 'albers usa'
+                    },
+                    showland: true,
+                    landcolor: 'rgb(250,250,250)',
+                    subunitcolor: 'rgb(217,217,217)',
+                    countrycolor: 'rgb(217,217,217)',
+                    countrywidth: 0.5,
+                    subunitwidth: 0.5
+                }} }
+        />
     )
 }

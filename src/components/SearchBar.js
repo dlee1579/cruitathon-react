@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // import styled from 'styled-components';
 import teamsList from './Teams.json';
-
+// import InputGroup from 'react-bootstrap/InputGroup';
+// import FormControl from 'react-bootstrap/FormControl';
 
 export const SearchBar = (props) => {
     const liststyle = {
@@ -27,12 +28,15 @@ export const SearchBar = (props) => {
     }, [search]);
 
     const handleChange = event => {
-        setSearch(event.target.value);
+        setSearch(event.target.value.toLowerCase());
     }
 
     return (
         <div className="row justify-content-center text-center">
             <input type="text" onChange={handleChange} id='teamInput' placeholder='Team Name' value={search} className="form-control form-control-lg text-center"/>
+            {/* <InputGroup>
+                <FormControl placeholder="Team Name" />
+            </InputGroup> */}
             <div id="search_results">
                 {searchResults.map(item => {
                     return (

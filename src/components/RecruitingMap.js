@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react';
+import React from 'react';
 import Plot from 'react-plotly.js';
 
 export const RecruitingMap = (props) => {
@@ -30,10 +30,11 @@ export const RecruitingMap = (props) => {
 
     return (
         <Plot
+        className="col-xl-8"
         data={props.data}
         layout={ {
-            width: 700,
-            height: 550,
+            // width: 700,
+            // height: 550,
             title: props.name, 
             geo: {
                 scope: 'usa',

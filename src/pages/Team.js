@@ -12,6 +12,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import {RecruitingMap} from '../components/RecruitingMap';
 import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 export const Team = (props) => {
@@ -19,6 +20,7 @@ export const Team = (props) => {
     const [School, setSchool] = useState({});
     const [year, setYear] = useState(2020);
     const [mapType, setMapType] = useState('state');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         let url = "https://cruitathon-flask.herokuapp.com/team/" + props.match.params.id + "/" + year;
@@ -29,11 +31,13 @@ export const Team = (props) => {
                 setTeam(data);
                 // console.log(data);
                 // console.log(Team);
+                setLoading(false);
             })
             );
         ReactGA.initialize("UA-160209262-2");
         ReactGA.pageview(window.location.pathname);
         setSchool(TeamsList.find(element => element["team"] === props.match.params.id));
+
         // console.log(Team);
         // console.log(TeamsList.find(element => element["team"] === props.match.params.id));
     // }, [props.match.params.id]);
@@ -51,6 +55,17 @@ export const Team = (props) => {
             )
         }
     }
+    const loadPage = () => {
+        if (loading) {
+            return (
+                <Row className="justify-content-md-center">
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                </Row>
+            )
+        }
+    }
 
     return (
         <div>
@@ -58,8 +73,13 @@ export const Team = (props) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </MetaTags>
             <Banner School={School} Team={Team.team_aggregate_stats} Teams={props.location.state}></Banner>
+            {loadPage()}
+
+            {/* <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner> */}
             <div className="container">
-                <DropdownButton id="dropdown-basic-button" size='sm' title={year} onClick={(e)=>{
+                <DropdownButton id="dropdown-basic-button" size='lg' title={year} onClick={(e)=>{
                     setYear(e.target.text);
                     // console.log(e.target.text);
                     console.log(props.match.params.id);
@@ -80,8 +100,8 @@ export const Team = (props) => {
                     <Graph data={Team.team_competition_stats} name={props.match.params.id + " Commits by Rival Offers"}/>
                 </Row>
                 <Row>
-                    <Button variant="secondary" value="state" onClick={(e)=> setMapType(e.target.value)}>State View</Button>
-                    <Button variant="dark" value="geo" onClick={(e)=> setMapType(e.target.value)}>Nation View</Button>
+                    <Button variant="secondary" value="state" onClick={(e)=> setMapType(e.target.value)} size='lg'>State View</Button>
+                    <Button variant="dark" value="geo" onClick={(e)=> setMapType(e.target.value)} size='lg'>Nation View</Button>
                 </Row>
                 {/* <h3>{mapType}</h3> */}
                     {/* <Graph data={Team.team_hometown_stats} name={props.match.params.id + " Commits by Geographic Location"}/> */}
