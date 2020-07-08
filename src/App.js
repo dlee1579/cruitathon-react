@@ -8,6 +8,7 @@ import './App.css';
 
 import Home from './pages/Home';
 import Team from './pages/Team';
+import Pet from './pages/Pet';
 
 function App() {
   useEffect(() => {
@@ -17,6 +18,7 @@ function App() {
     <div>
       <Route path='/' component={Home} exact />
       <Route path='/team/:id' component={Team}/>
+      <Route path='/pet' component={Pet}/>
     </div>
   );
 }
