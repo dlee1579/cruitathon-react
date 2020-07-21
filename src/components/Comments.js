@@ -52,6 +52,8 @@ export const Comments = ({ team, comments, location}) => {
     const submitComment = event => {
         // console.log(comment);
         event.preventDefault();
+        // let text = event.target.value;
+        console.log(text);
 
         const requestOptions = {
             method: 'POST',
@@ -87,7 +89,7 @@ export const Comments = ({ team, comments, location}) => {
             <h6 >Post your thoughts here. This comment section is a work in progress. In the meantime, everyone gets a dog picture.</h6>
             <Form onSubmit={submitComment}>
                 <Form.Group controlId='formComment'>
-                    <Form.Control as="textarea" rows="3" name='text' onChange={changeComment} />
+                    <Form.Control as="textarea" rows="3" name='text' onChange={changeComment}/>
                 </Form.Group>
                 <Button variant="dark" type="submit" >Submit</Button>
             </Form>
@@ -97,12 +99,27 @@ export const Comments = ({ team, comments, location}) => {
                 <br/>
                 <h4>Recent Comments:</h4>
                 {commentsList && commentsList.map(comment => {
-                    // console.log(randomAdopt())
+                    console.log(comment);
                     if (dogResults.length > 0) {
                         let dog = randomAdopt();
-                        while (!dog.primary_photo_cropped.small) {
-                            dog = randomAdopt();
+                        // while (!dog.primary_photo_cropped.small) {
+                        console.log(dog);
+                        let hasImage = false;
+                        while (!hasImage) {
+                            try {
+                                if (dog.primary_photo_cropped.hasOwnProperty("small")){
+                                    hasImage = true;
+                                }
+                                // dog.primary_photo_cropped.hasOwnProperty("small");
+                            }
+                            catch(error) {
+                                console.log(error);
+                                dog = randomAdopt();
+                            }
                         }
+                        // while (!dog.hasOwnProperty('primary_photo_cropped') || !dog.primary_photo_cropped.hasOwnProperty("small")){
+                        //     dog = randomAdopt();
+                        // }
                         return <Row style={{padding: "20px"}}>
                             <div style={{display: "inline-block", alignItems: "center", textAlign: "center"}}>
                                 <Image src={dog.primary_photo_cropped.small} height="60" style={{display: "block", margin:"0 auto"}}/>
