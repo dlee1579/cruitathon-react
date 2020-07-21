@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Client } from "@petfinder/petfinder-js";
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
@@ -8,6 +8,13 @@ export const Pet = () => {
     const [city, setCity] = useState('');
     const [results, setResults] = useState([]);
     // const [search, setSearch] = useState('');
+    useEffect(()=>{
+        let url = "https://api.ipify.org/";
+        fetch(url)
+        .then(response => {
+            console.log(response);
+        })
+    }, [])
 
     const client = new Client({apiKey: "tiUlZUY7YaX2rJiP3HCRbvBEBbunRE0alzNOW5VIon7bNegoho", secret: "eWwiB4nda2QhHdnOtff3aegAE1cb5idRFH0UvePm"});
 
@@ -64,13 +71,16 @@ export const Pet = () => {
                     // return <p>{item.primary_photo_cropped.full}</p>
                     console.log(item.primary_photo_cropped);
                     if (item.primary_photo_cropped) {
-                    return (
-                        <div>
-                            {/* <p>{item.primary_photo_cropped.full}</p> */}
-                            <img src={item.primary_photo_cropped.small} alt=""/>
-                            <p>{item.url}</p>
-                        </div>
-                        )
+                        return (
+                            <div>
+                                {/* <p>{item.primary_photo_cropped.full}</p> */}
+                                <img src={item.primary_photo_cropped.small} alt=""/>
+                                <p>{item.url}</p>
+                            </div>
+                            )
+                    }
+                    else {
+                        return null;
                     }
                     // return <p>{item.photos.full}</p>
                 })}

@@ -4,16 +4,37 @@ import styled from 'styled-components';
 import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+// import Col from 'react-bootstrap/Col';
+import { Client } from "@petfinder/petfinder-js";
 
 
-export const Comments = ({ team, comments}) => {
+
+
+export const Comments = ({ team, comments, location}) => {
     const [text, setText] = useState('');
     const [commentsList, setCommentsList] = useState();
     const isFirstRun = useRef(true);
+    const [dogResults, setDogResults] = useState([]);
     
     // console.log(isFirstRun);
     useEffect(()=> {
+        const client = new Client({apiKey: "tiUlZUY7YaX2rJiP3HCRbvBEBbunRE0alzNOW5VIon7bNegoho", secret: "eWwiB4nda2QhHdnOtff3aegAE1cb5idRFH0UvePm"});
         setCommentsList(comments);
+        client.animal.search({
+            location: location,
+            age: 'senior',
+            type: 'Dog',
+            before: '2019-12-07T19:13:01+00:00',
+            status: 'adoptable',
+            limit: 50,
+        })
+            .then(response => {
+                console.log(location);
+                setDogResults(response.data.animals);
+                console.log(response.data.animals);
+            }
+            )
         // console.log(comments);
         // console.log(isFirstRun);
     }, [comments])
@@ -53,11 +74,12 @@ export const Comments = ({ team, comments}) => {
         }
     }
 
-    const importAll = r => {
-        return r.keys().map(r);
-    }
-    const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/))
-    const random = uniqueRandomArray(images);
+    // const importAll = r => {
+    //     return r.keys().map(r);
+    // }
+    // const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/))
+    // const random = uniqueRandomArray(images);
+    const randomAdopt = uniqueRandomArray(dogResults);
 
     return (
         <MainContainer className="comments-container" style={{paddingTop: "100px", fontFamily: "college-block", marginLeft: "20px"}}>
@@ -75,11 +97,43 @@ export const Comments = ({ team, comments}) => {
                 <br/>
                 <h4>Recent Comments:</h4>
                 {commentsList && commentsList.map(comment => {
-                    return <div className="row" style={{padding: "20px"}}>
-                        <Image src={random()} height="60"/>
-                        <p className="speech-bubble" >{comment.text}</p>
-                    </div>
+                    // console.log(randomAdopt())
+                    if (dogResults.length > 0) {
+                        let dog = randomAdopt();
+                        while (!dog.primary_photo_cropped.small) {
+                            dog = randomAdopt();
+                        }
+                        return <Row style={{padding: "20px"}}>
+                            <div style={{display: "inline-block", alignItems: "center", textAlign: "center"}}>
+                                <Image src={dog.primary_photo_cropped.small} height="60" style={{display: "block", margin:"0 auto"}}/>
+                                <a href={dog.url} style={{fontSize: 12, color: 'black', background: 'gold', textAlign:"center"}}>adopt me!</a>
+                            </div>
+                            <div style={{display: "inline-block"}}>
+                                <p className="speech-bubble" >{comment.text}</p>
+                            </div>
+                        </Row>
+                        // <div style={{padding: "20px"}}>
+                        //     <Image src={dog.primary_photo_cropped.small} height="60"/>
+                        //     <p className="speech-bubble" >{comment.text}</p>
+                        // </div>
+                    }
+                    else {
+                        return null;
+                    }
                 })}
+                {/* <div>
+                    {dogResults.map(item=>{
+                        console.log(item.primary_photo_cropped.small);
+                        if (item.primary_photo_cropped) {
+                        return (
+                            <div>
+                                <img src={item.primary_photo_cropped.small} alt=""/>
+                                <p>{item.url}</p>
+                            </div>
+                            )
+                        }
+                    })}
+                </div> */}
             </div>
         </MainContainer>
     )

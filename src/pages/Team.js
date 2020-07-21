@@ -58,7 +58,7 @@ export const Team = (props) => {
     const loadPage = () => {
         if (loading) {
             return (
-                <Row className="justify-content-md-center">
+                <Row style={{justifyContent: 'center'}} className="justify-content-md-center">
                     <Spinner animation="border" role="status">
                         <span className="sr-only">Loading...</span>
                     </Spinner>
@@ -74,6 +74,7 @@ export const Team = (props) => {
             </MetaTags>
             <Banner School={School} Team={Team.team_aggregate_stats} Teams={props.location.state}></Banner>
             {loadPage()}
+            {/* <div>{School.city + ", " + School.state}</div> */}
 
             {/* <Spinner animation="border" role="status">
                 <span className="sr-only">Loading...</span>
@@ -111,7 +112,7 @@ export const Team = (props) => {
                 {/* <RecruitingMap style={{display: 'none'}} data={Team.team_hometown_stats} name={props.match.params.id + " Commits by Geographic Location"}></RecruitingMap> */}
 
                 <div className="row">
-                    <Comments team={props.match.params.id} comments={Team.comments_list}></Comments>
+                    <Comments team={props.match.params.id} comments={Team.comments_list} location={School.city + ", " + School.state}></Comments>
                 </div>
             </div>
         </div>
