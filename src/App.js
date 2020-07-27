@@ -9,7 +9,7 @@ import './App.css';
 import Home from './pages/Home';
 import Team from './pages/Team';
 import Pet from './pages/Pet';
-import Signup from './pages/SignUp';
+import SignUp from './pages/SignUp';
 
 function App() {
   useEffect(() => {

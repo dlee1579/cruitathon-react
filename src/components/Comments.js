@@ -122,7 +122,7 @@ export const Comments = ({ team, comments, location}) => {
                         // }
                         return <Row style={{padding: "20px"}}>
                             <div style={{display: "inline-block", alignItems: "center", textAlign: "center"}}>
-                                <Image src={dog.primary_photo_cropped.small} height="60" style={{display: "block", margin:"0 auto"}}/>
+                                <Image src={dog.primary_photo_cropped.small} height="90" style={{display: "block", margin:"0 auto"}}/>
                                 <a href={dog.url} style={{fontSize: 12, color: 'black', background: 'gold', textAlign:"center"}}>adopt me!</a>
                             </div>
                             <div style={{display: "inline-block"}}>
@@ -163,13 +163,13 @@ const MainContainer = styled.div`
     .comments-container {
         border-radius: 10px;
         padding: 20px;
-        font-weight: bold;
+        // font-weight: bold;
         font-family: college-block;
         
     }
 
     .comments-header {
-        background: #000000;
+        background: #464646;
         border-radius: .2em;
         color: white;
         padding: 10px;
@@ -177,14 +177,15 @@ const MainContainer = styled.div`
 
     .speech-bubble {
         position: relative;
-        background: #000000;
+        background: #DFDFDF;
         border-radius: .4em;
-        color: white;
+        color: black;
         margin-left: 20px;
         margin-top: 20px;
         padding: 10px;
         font-family: calibri;
-        font-weight: bold;
+        // font-weight: bold;
+        font-size: 20px;
 
     }
     
@@ -196,7 +197,7 @@ const MainContainer = styled.div`
         width: 0;
         height: 0;
         border: 20px solid transparent;
-        border-right-color: #000000;
+        border-right-color: #DFDFDF;
         border-left: 0;
         border-top: 0;
         margin-top: -5px;
