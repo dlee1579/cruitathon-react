@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 // import Col from 'react-bootstrap/Col';
 import { Client } from "@petfinder/petfinder-js";
+import Spinner from 'react-bootstrap/Spinner';
 
 
 
@@ -21,20 +22,42 @@ export const Comments = ({ team, comments, location}) => {
     useEffect(()=> {
         const client = new Client({apiKey: "tiUlZUY7YaX2rJiP3HCRbvBEBbunRE0alzNOW5VIon7bNegoho", secret: "eWwiB4nda2QhHdnOtff3aegAE1cb5idRFH0UvePm"});
         setCommentsList(comments);
-        client.animal.search({
+        const searchParams = {
             location: location,
             age: 'senior',
             type: 'Dog',
             before: '2019-12-07T19:13:01+00:00',
             status: 'adoptable',
             limit: 50,
-        })
-            .then(response => {
-                console.log(location);
-                setDogResults(response.data.animals);
-                console.log(response.data.animals);
-            }
+        };
+        if (location !== 'undefined, undefined'){
+            client.animal.search(
+                searchParams
             )
+                .then(response => {
+                    // console.log(location);
+                    setDogResults(response.data.animals);
+                    console.log(response.data.animals);
+                    // return dogResults;
+                    if (response.data.animals.length === 0) {
+                        delete searchParams.age;
+                        client.animal.search(searchParams)
+                            .then(response => {
+                                console.log('no old dogs found, editing query parameters');
+                                setDogResults(response.data.animals);
+                                console.log(response.data.animals);
+                            })
+                    }
+                }
+                )
+                .catch(err => {
+                    console.log(err);
+                })
+                .then(response => {
+                    console.log('response: ', response);
+                })
+        }
+        
         // console.log(comments);
         // console.log(isFirstRun);
     }, [comments])
@@ -82,6 +105,18 @@ export const Comments = ({ team, comments, location}) => {
     // const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/))
     // const random = uniqueRandomArray(images);
     const randomAdopt = uniqueRandomArray(dogResults);
+    
+    const loadPage = (argument) => {
+        if (!argument) {
+            return (
+                <Row style={{justifyContent: 'center'}} className="justify-content-md-center">
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                </Row>
+            )
+        }
+    }
 
     return (
         <MainContainer className="comments-container" style={{paddingTop: "100px", fontFamily: "college-block", marginLeft: "20px"}}>
@@ -98,12 +133,13 @@ export const Comments = ({ team, comments, location}) => {
                 <br/>
                 <br/>
                 <h4>Recent Comments:</h4>
+                {loadPage(commentsList)}
                 {commentsList && commentsList.map(comment => {
-                    console.log(comment);
+                    // console.log(comment);
                     if (dogResults.length > 0) {
                         let dog = randomAdopt();
                         // while (!dog.primary_photo_cropped.small) {
-                        console.log(dog);
+                        // console.log(dog);
                         let hasImage = false;
                         while (!hasImage) {
                             try {
@@ -122,8 +158,10 @@ export const Comments = ({ team, comments, location}) => {
                         // }
                         return <Row style={{padding: "20px"}}>
                             <div style={{display: "inline-block", alignItems: "center", textAlign: "center"}}>
-                                <Image src={dog.primary_photo_cropped.small} height="90" style={{display: "block", margin:"0 auto"}}/>
-                                <a href={dog.url} style={{fontSize: 12, color: 'black', background: 'gold', textAlign:"center"}}>adopt me!</a>
+                                <a href={dog.url}>
+                                    <Image src={dog.primary_photo_cropped.small} height="90" style={{display: "block", margin:"0 auto"}}/>
+                                </a>
+                                <a href={dog.url} style={{fontSize: 20, color: 'black', background: 'gold', textAlign:"center"}}>adopt me!</a>
                             </div>
                             <div style={{display: "inline-block"}}>
                                 <p className="speech-bubble" >{comment.text}</p>
