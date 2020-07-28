@@ -13,6 +13,9 @@ import Button from 'react-bootstrap/Button';
 import {RecruitingMap} from '../components/RecruitingMap';
 import Row from 'react-bootstrap/Row';
 import Spinner from 'react-bootstrap/Spinner';
+import { FiMenu } from 'react-icons/fi';
+import Sidebar from '../components/Sidebar'
+
 
 
 export const Team = (props) => {
@@ -21,6 +24,7 @@ export const Team = (props) => {
     const [year, setYear] = useState(2020);
     const [mapType, setMapType] = useState('state');
     const [loading, setLoading] = useState(true);
+    const [visible, setVisible] = useState('none');
 
     useEffect(() => {
         let url = "https://cruitathon-flask.herokuapp.com/team/" + props.match.params.id + "/" + year;
@@ -42,7 +46,7 @@ export const Team = (props) => {
         // console.log(TeamsList.find(element => element["team"] === props.match.params.id));
     // }, [props.match.params.id]);
     }, [props.match.url, props.match.params.id, year]);
-    
+
     const showMap = (Team, props) => {
         if (mapType === 'state'){
             return (
@@ -66,12 +70,27 @@ export const Team = (props) => {
             )
         }
     }
+    const closeSidebar = () => {
+        setVisible('none');
+        console.log(visible);
+    }
+    const openSidebar = () => {
+        setVisible('block');
+        console.log(visible);
+    }
 
     return (
         <div>
             <MetaTags>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </MetaTags>
+            <Sidebar closeSidebar={closeSidebar} visible={visible}/>
+            <Button
+            onClick={openSidebar}
+            style={{position:'absolute', background: 'transparent', border: '0px'}}
+            color="link" size="lg">
+                <FiMenu/>
+            </Button>
             <Banner School={School} Team={Team.team_aggregate_stats} Teams={props.location.state}></Banner>
             {loadPage()}
             {/* <div>{School.city + ", " + School.state}</div> */}
