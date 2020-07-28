@@ -123,7 +123,7 @@ export const Comments = ({ team, comments, location}) => {
             <h1 className="comments-header">Comments Section</h1>
             <h6 >Post your thoughts here. This comment section is a work in progress. In the meantime, everyone gets a dog picture.</h6>
             <Form onSubmit={submitComment}>
-                <Form.Group controlId='formComment'>
+                <Form.Group controlId='formComment' style={{fontFamily: 'calibri'}}>
                     <Form.Control as="textarea" rows="3" name='text' onChange={changeComment}/>
                 </Form.Group>
                 <Button variant="dark" type="submit" >Submit</Button>
