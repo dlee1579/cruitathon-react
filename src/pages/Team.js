@@ -41,7 +41,7 @@ export const Team = (props) => {
         ReactGA.initialize("UA-160209262-2");
         ReactGA.pageview(window.location.pathname);
         setSchool(TeamsList.find(element => element["team"] === props.match.params.id));
-
+        setVisible('none');
         // console.log(Team);
         // console.log(TeamsList.find(element => element["team"] === props.match.params.id));
     // }, [props.match.params.id]);
