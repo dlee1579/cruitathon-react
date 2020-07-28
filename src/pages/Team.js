@@ -99,7 +99,7 @@ export const Team = (props) => {
                 <span className="sr-only">Loading...</span>
             </Spinner> */}
             <div className="container">
-                <DropdownButton id="dropdown-basic-button" size='lg' title={year} onClick={(e)=>{
+                <DropdownButton id="dropdown-basic-button" size='lg' variant="dark" title={year} onClick={(e)=>{
                     setYear(e.target.text);
                     // console.log(e.target.text);
                     console.log(props.match.params.id);
