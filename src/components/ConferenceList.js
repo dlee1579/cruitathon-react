@@ -13,7 +13,7 @@ export const ConferenceList = ({ Teams }, props) => {
     return (
         <MainContainer className="container">
             <div className="row justify-content-md-center">
-                <div className="col-xl-4" align='center'>
+                <div align='center' style={{paddingLeft: '20px', paddingRight: '20px'}}>
                     <h2>Teams by Conference</h2>
                     
                     <div className="accordion">

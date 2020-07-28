@@ -17,7 +17,7 @@ export const ConferenceTeams = ( { Conference, Teams }) => {
                     {Teams.filter(Team => Team["conference"] === Conference).map(Team => {
                             // console.log(Teams);
                             return (
-                                <div>
+                                <div style={{width: '100%'}}>
                                     <Link style={{fontSize: "24px"}} to={{pathname: '/team/' + Team.team, Teams: Team}} Team={Team}>{Team.team}</Link>
                                 </div>
                             )
